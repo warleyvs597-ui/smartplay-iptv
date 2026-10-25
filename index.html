@@ -1,0 +1,67 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="description" content="Reprodutor IPTV web para listas M3U e canais públicos autorizados.">
+<title>SmartPlay IPTV</title>
+<link rel="stylesheet" href="styles.css">
+</head>
+<body>
+<div class="app-shell">
+  <aside class="sidebar">
+    <div class="brand"><span class="brand-mark">▶</span><span>SMART<span class="accent">PLAY</span><small>IPTV PLAYER</small></span></div>
+    <button class="nav active" data-view="home">⌂ <span>Início</span></button>
+    <button class="nav" data-view="live">▣ <span>TV ao vivo</span></button>
+    <button class="nav" data-view="favorites">♡ <span>Favoritos</span></button>
+    <div class="side-bottom">
+      <div class="side-label">SUA LISTA</div>
+      <button class="nav" id="openPlaylist">＋ <span>Adicionar M3U</span></button>
+      <p class="side-note">Use apenas listas e transmissões que você tem autorização para acessar.</p>
+    </div>
+  </aside>
+  <main class="main">
+    <header class="topbar">
+      <div><div class="eyebrow">SEU ENTRETENIMENTO</div><h1 id="pageTitle">Início</h1></div>
+      <div class="top-actions"><span class="status-dot"></span><span class="status-text">Player pronto</span><button id="settingsBtn" class="icon-btn" title="Configurações">⚙</button></div>
+    </header>
+    <section class="hero">
+      <div class="hero-copy"><span class="pill">IPTV WEB PLAYER</span><h2>Seus canais.<br><span>Do seu jeito.</span></h2>
+      <p>Reproduza sua lista M3U ou explore canais públicos de fontes autorizadas.</p>
+      <div class="hero-actions"><button class="primary" id="heroAdd">＋ Adicionar lista M3U</button><button class="secondary" id="browseChannels">Explorar canais</button></div></div>
+      <div class="hero-art"><div class="orb orb1"></div><div class="orb orb2"></div><div class="screen"><div class="screen-top"><i></i><i></i><i></i></div><div class="screen-play">▶</div><div class="screen-lines"></div></div><div class="art-tag">LIVE <b>●</b></div></div>
+    </section>
+    <section class="stats">
+      <div class="stat"><span class="stat-icon">▣</span><div><strong id="channelCount">0</strong><small>Canais carregados</small></div></div>
+      <div class="stat"><span class="stat-icon">♡</span><div><strong id="favoriteCount">0</strong><small>Favoritos</small></div></div>
+      <div class="stat"><span class="stat-icon">◉</span><div><strong>WEB</strong><small>Compatível com PC</small></div></div>
+    </section>
+    <section class="content-section">
+      <div class="section-head"><div><div class="eyebrow">SINTONIZE AGORA</div><h2 id="listHeading">Canais disponíveis</h2></div><div class="tools"><input id="searchInput" type="search" placeholder="Buscar canal..." aria-label="Buscar canal"><select id="categoryFilter" aria-label="Filtrar categoria"><option value="all">Todas as categorias</option></select></div></div>
+      <div id="emptyState" class="empty-state"><div class="empty-icon">▣</div><h3>Sua programação começa aqui</h3><p>Adicione uma lista M3U ou carregue a demonstração com canais públicos de exemplo.</p><div class="empty-actions"><button class="primary" id="emptyAdd">Adicionar M3U</button><button class="secondary" id="demoBtn">Carregar demonstração</button></div></div>
+      <div id="channelGrid" class="channel-grid"></div>
+    </section>
+    <footer>SmartPlay é um reprodutor de mídia independente. Não fornece nem hospeda transmissões de TV.</footer>
+  </main>
+</div>
+<div class="modal-backdrop" id="playlistModal" hidden>
+ <div class="modal">
+  <button class="modal-close" data-close="playlistModal">×</button><div class="eyebrow">CONFIGURAR CONTEÚDO</div><h2>Adicionar lista M3U</h2><p>Carregue um arquivo .m3u/.m3u8 do seu computador ou informe uma URL direta autorizada.</p>
+  <label for="m3uFile">Arquivo M3U</label><input type="file" id="m3uFile" accept=".m3u,.m3u8,text/plain">
+  <div class="or">OU</div><label for="m3uUrl">URL da lista</label><input type="url" id="m3uUrl" placeholder="https://exemplo.com/lista.m3u">
+  <p class="hint">Listas remotas precisam permitir acesso CORS para serem carregadas no navegador. Algumas transmissões podem não funcionar devido a CORS, codecs ou restrições do provedor.</p>
+  <div id="playlistError" class="error" role="alert"></div><button id="loadM3u" class="primary full">Carregar lista</button>
+ </div>
+</div>
+<div class="modal-backdrop" id="playerModal" hidden>
+ <div class="player-modal">
+  <button class="modal-close light" data-close="playerModal">×</button><div class="player-head"><div><div class="eyebrow">REPRODUZINDO AGORA</div><h2 id="playingTitle">Canal</h2></div><span class="live-pill">● AO VIVO</span></div>
+  <video id="videoPlayer" controls autoplay playsinline></video>
+  <div id="playerMessage" class="player-message">Se o vídeo não iniciar, a fonte pode não ser compatível com reprodução direta no navegador.</div>
+ </div>
+</div>
+<div class="toast" id="toast" role="status"></div>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+<script src="app.js"></script>
+</body>
+</html>
