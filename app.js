@@ -83,7 +83,7 @@
       } else throw new Error('Escolha um arquivo M3U ou informe a URL.');
       const channels = parseM3U(text);
       if (!channels.length) throw new Error('Nenhum canal encontrado. Verifique se a lista está no formato M3U e contém URLs de transmissão.');
-      if (url) { try { localStorage.setItem('warleyIptvPlaylistUrl', url); } catch (_) {} }
+      if (url) { try { localStorage.setItem('warleyIptvPlaylistUrlV2', url); } catch (_) {} }
       loadChannels(channels, `${channels.length} canais carregados.`);
     } catch (e) {
       $('playlistError').textContent = e.message.includes('fetch') || e instanceof TypeError
@@ -151,7 +151,7 @@
   // Restaura automaticamente a última URL usada; na primeira visita usa a lista brasileira padrão.
   const DEFAULT_PLAYLIST_URL = 'https://raw.githubusercontent.com/warleyvs597-ui/smartplay-iptv/main/warley-canais.m3u';
   async function restorePlaylist() {
-    const playlistUrl = (() => { try { return localStorage.getItem('warleyIptvPlaylistUrl') || DEFAULT_PLAYLIST_URL; } catch (_) { return DEFAULT_PLAYLIST_URL; } })();
+    const playlistUrl = (() => { try { return localStorage.getItem('warleyIptvPlaylistUrlV2') || DEFAULT_PLAYLIST_URL; } catch (_) { return DEFAULT_PLAYLIST_URL; } })();
     $('m3uUrl').value = playlistUrl;
     try {
       const response = await fetch(playlistUrl);
@@ -159,7 +159,7 @@
       const text = await response.text();
       const channels = parseM3U(text);
       if (!channels.length) throw new Error('A lista não contém canais reconhecíveis.');
-      try { localStorage.setItem('warleyIptvPlaylistUrl', playlistUrl); } catch (_) {}
+      try { localStorage.setItem('warleyIptvPlaylistUrlV2', playlistUrl); } catch (_) {}
       loadChannels(channels, `${channels.length} canais carregados automaticamente.`);
     } catch (_) {
       // Mantém o endereço no campo para facilitar uma nova tentativa manual.
