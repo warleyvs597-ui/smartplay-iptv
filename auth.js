@@ -32,7 +32,7 @@
     hls.src = 'https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js';
     hls.onload = () => {
       const app = document.createElement('script');
-      app.src = 'app.js?v=auth-gate-20261025';
+      app.src = 'app.js?v=neon-dashboard-20261025';
       document.body.appendChild(app);
     };
     hls.onerror = () => {
