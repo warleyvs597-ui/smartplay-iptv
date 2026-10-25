@@ -9,27 +9,7 @@
 <link rel="stylesheet" href="styles.css?v=neon-dashboard-20261025">
 </head>
 <body>
-<section id="authScreen" class="auth-screen">
-  <div class="auth-card">
-    <div class="auth-brand"><span class="brand-mark">▶</span><div><strong>WARLEY <span>IPTV</span></strong><small>CRIADO POR WARLEY</small></div></div>
-    <div class="eyebrow">ACESSO EXCLUSIVO POR CONTA</div>
-    <h1 id="authTitle">Entre na sua conta</h1>
-    <p class="auth-subtitle">Crie sua conta grátis ou entre para acessar o WARLEY IPTV.</p>
-    <button id="googleAuth" class="google-btn" type="button"><span class="google-g">G</span> Continuar com Google</button>
-    <div class="auth-divider"><span>ou use seu e-mail</span></div>
-    <form id="authForm">
-      <div id="nameField" hidden><label for="authName">Seu nome</label><input id="authName" type="text" autocomplete="name" placeholder="Como podemos te chamar?"></div>
-      <label for="authEmail">E-mail</label><input id="authEmail" type="email" autocomplete="email" placeholder="voce@email.com" required>
-      <label for="authPassword">Senha</label><input id="authPassword" type="password" autocomplete="current-password" minlength="6" placeholder="Mínimo de 6 caracteres" required>
-      <button id="authSubmit" class="primary full" type="submit">Entrar</button>
-    </form>
-    <button id="forgotPassword" class="text-button" type="button">Esqueci minha senha</button>
-    <p id="authError" class="auth-message" role="status"></p>
-    <p class="auth-switch"><span id="authSwitchText">Ainda não tem conta?</span> <button id="authSwitch" type="button">Criar conta</button></p>
-    <p class="auth-privacy">Sua conta é gerenciada pelo Firebase Authentication. Nunca compartilhe sua senha.</p>
-  </div>
-</section>
-<div class="app-shell" id="appShell" hidden>
+<div class="app-shell" id="appShell">
   <aside class="sidebar">
     <div class="brand"><span class="brand-mark">▶</span><span>WARLEY <span class="accent">IPTV</span><small>CRIADO POR WARLEY</small></span></div>
     <button class="nav active" data-view="home"><span class="nav-icon">⌂</span><span>Início</span></button>
@@ -115,9 +95,7 @@
  </div>
 </div>
 <div hidden><select id="categoryFilter" aria-label="Categoria"><option value="all">Todas as categorias</option></select><span id="favoriteCount">0</span></div>\n<div class="toast" id="toast" role="status"></div>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-app-compat.js"></script>
-<script src="https://www.gstatic.com/firebasejs/10.14.1/firebase-auth-compat.js"></script>
-<script src="firebase-config.js?v=1"></script>
-<script src="auth.js?v=dashboard-20261025"></script>
+<script src="https://cdn.jsdelivr.net/npm/hls.js@1.5.17/dist/hls.min.js"></script>
+<script src="app.js?v=direct-load-20261025"></script>
 </body>
 </html>
