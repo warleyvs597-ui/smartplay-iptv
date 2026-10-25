@@ -6,7 +6,7 @@
 <meta name="description" content="Reprodutor IPTV web para listas M3U e canais públicos autorizados.">
 <title>WARLEY IPTV | Criado por Warley</title>
 <meta name="theme-color" content="#071426">\n<meta property="og:title" content="WARLEY IPTV — Criado por Warley">\n<meta property="og:description" content="Player IPTV web personalizado por Warley.">
-<link rel="stylesheet" href="styles.css?v=auth-gate-20261025">
+<link rel="stylesheet" href="styles.css?v=neon-dashboard-20261025">
 </head>
 <body>
 <section id="authScreen" class="auth-screen">
@@ -32,37 +32,70 @@
 <div class="app-shell" id="appShell" hidden>
   <aside class="sidebar">
     <div class="brand"><span class="brand-mark">▶</span><span>WARLEY <span class="accent">IPTV</span><small>CRIADO POR WARLEY</small></span></div>
-    <button class="nav active" data-view="home">⌂ <span>Início</span></button>
-    <button class="nav" data-view="live">▣ <span>TV ao vivo</span></button>
-    <button class="nav" data-view="favorites">♡ <span>Favoritos</span></button>
+    <button class="nav active" data-view="home"><span class="nav-icon">⌂</span><span>Início</span></button>
+    <button class="nav" data-view="live"><span class="nav-icon">▣</span><span>TV ao Vivo</span><small class="nav-count">+600</small></button>
+    <button class="nav" data-category="Filmes"><span class="nav-icon">▧</span><span>Filmes</span><small class="nav-count">+3.000</small></button>
+    <button class="nav" data-category="Séries"><span class="nav-icon">▣</span><span>Séries</span><small class="nav-count">+1.000</small></button>
+    <button class="nav" data-category="Esportes"><span class="nav-icon">⚽</span><span>Esportes</span><small class="nav-count">+200</small></button>
+    <button class="nav" data-category="Canais 24h"><span class="nav-icon">◷</span><span>Canais 24h</span></button>
+    <button class="nav" data-category="Infantil"><span class="nav-icon">☺</span><span>Infantil</span></button>
+    <button class="nav" data-view="favorites"><span class="nav-icon">♥</span><span>Favoritos</span></button>
+    <button class="nav" id="settingsBtn"><span class="nav-icon">⚙</span><span>Configurações</span></button>
     <div class="side-bottom">
-      <div class="side-label">SUA LISTA</div>
-      <button class="nav" id="openPlaylist">＋ <span>Adicionar M3U</span></button>
-      <p class="side-note">Use apenas listas e transmissões que você tem autorização para acessar.</p>
+      <div class="side-promo"><div class="promo-crown">♛</div><strong>WARLEY <span>IPTV</span></strong><small>CRIADO POR WARLEY</small><p>Obrigado por usar!<br>Seu entretenimento começa aqui.</p><b>WARLEY IPTV</b></div>
+      <button class="nav" id="openPlaylist"><span class="nav-icon">＋</span><span>Adicionar lista M3U</span></button>
+      <p class="side-note">Use apenas transmissões autorizadas.</p>
     </div>
   </aside>
   <main class="main">
     <header class="topbar">
-      <div><div class="eyebrow">WARLEY IPTV • CRIADO POR WARLEY</div><h1 id="pageTitle">Início</h1></div>
-      <div class="top-actions"><span class="status-dot"></span><span class="status-text">Player pronto</span><button id="settingsBtn" class="icon-btn" title="Configurações">⚙</button></div>
+      <div class="top-search"><span>⌕</span><input id="searchInput" type="search" placeholder="Buscar canais, filmes, séries..." aria-label="Buscar canais"></div>
+      <div class="top-actions"><span class="wifi-icon">⌁</span><div class="device-label">Sua TV, do seu jeito<small>WARLEY IPTV</small></div><span class="status-dot"></span><button class="icon-btn" id="accountBtn" title="Minha conta">●</button></div>
     </header>
-    <section class="hero">
-      <div class="hero-copy"><img class="hero-brand-image" src="assets/warley-iptv.svg?v=2" alt="WARLEY IPTV — Criado por Warley"><span class="pill">WARLEY IPTV • WEB PLAYER</span><h2>Seus canais.<br><span>Do seu jeito.</span></h2>
-      <p>Reproduza sua lista M3U ou explore canais públicos de fontes autorizadas.</p>
-      <div class="hero-actions"><button class="primary" id="heroAdd">＋ Adicionar lista M3U</button><button class="secondary" id="browseChannels">Explorar canais</button></div></div>
-      <div class="hero-art"><div class="orb orb1"></div><div class="orb orb2"></div><div class="screen"><div class="screen-top"><i></i><i></i><i></i></div><div class="screen-play">▶</div><div class="screen-lines"></div></div><div class="art-tag">LIVE <b>●</b></div></div>
-    </section>
-    <section class="stats">
-      <div class="stat"><span class="stat-icon">▣</span><div><strong id="channelCount">0</strong><small>Canais carregados</small></div></div>
-      <div class="stat"><span class="stat-icon">♡</span><div><strong id="favoriteCount">0</strong><small>Favoritos</small></div></div>
-      <div class="stat"><span class="stat-icon">◉</span><div><strong>WEB</strong><small>Compatível com PC</small></div></div>
-    </section>
-    <section class="content-section">
-      <div class="section-head"><div><div class="eyebrow">SINTONIZE AGORA</div><h2 id="listHeading">Canais disponíveis</h2></div><div class="tools"><input id="searchInput" type="search" placeholder="Buscar canal..." aria-label="Buscar canal"><select id="categoryFilter" aria-label="Filtrar categoria"><option value="all">Todas as categorias</option></select></div></div>
-      <div id="emptyState" class="empty-state"><div class="empty-icon">▣</div><h3>Sua programação começa aqui</h3><p>Adicione uma lista M3U ou carregue a demonstração com canais públicos de exemplo.</p><div class="empty-actions"><button class="primary" id="emptyAdd">Adicionar M3U</button><button class="secondary" id="demoBtn">Carregar demonstração</button></div></div>
-      <div id="channelGrid" class="channel-grid"></div>
-    </section>
-    <footer>WARLEY IPTV • Criado por Warley. Reprodutor de mídia independente; não fornece nem hospeda transmissões de TV.</footer>
+    <div class="dashboard-layout">
+      <div class="dashboard-main">
+        <section class="hero">
+          <div class="hero-copy"><div class="hero-brand-lockup"><img class="hero-brand-image" src="assets/warley-iptv.svg?v=3" alt="WARLEY IPTV — Criado por Warley"></div><h2>SEU ENTRETENIMENTO EM UM SÓ LUGAR!</h2>
+          <p>TV ao vivo, filmes, séries e esportes em uma experiência feita para você.</p>
+          <div class="hero-actions"><button class="primary" id="heroAdd">＋ Adicionar lista M3U</button><button class="secondary" id="browseChannels">Explorar canais</button></div></div>
+          <div class="hero-art"><div class="orb orb1"></div><div class="orb orb2"></div><div class="screen"><div class="screen-top"><i></i><i></i><i></i></div><div class="screen-play">▶</div><div class="screen-lines"></div></div><div class="art-tag">● AO VIVO</div></div>
+        </section>
+        <section class="quick-stats">
+          <div><span class="quick-icon">ϟ</span><div><strong>TV AO VIVO</strong><small id="channelCount">0 canais carregados</small></div></div>
+          <div><span class="quick-icon">▦</span><div><strong>FILMES E SÉRIES</strong><small>+4.000 títulos</small></div></div>
+          <div><span class="quick-icon">⚽</span><div><strong>ESPORTES</strong><small>Transmissões autorizadas</small></div></div>
+          <div><span class="quick-icon">♢</span><div><strong>ESTÁVEL E RÁPIDO</strong><small>Qualidade HD / FHD</small></div></div>
+        </section>
+        <section class="content-section featured-section">
+          <div class="section-head"><div><h2>★ Canais em Destaque</h2></div><button class="link-button" id="viewAllChannels">Ver todos ›</button></div>
+          <div id="channelGrid" class="channel-grid featured-grid"></div>
+          <div id="emptyState" class="empty-state"><div class="empty-icon">▣</div><h3>Sua programação começa aqui</h3><p>Adicione uma lista M3U sua ou explore fontes públicas autorizadas.</p><div class="empty-actions"><button class="primary" id="emptyAdd">Adicionar M3U</button><button class="secondary" id="demoBtn">Carregar demonstração</button></div></div>
+        </section>
+        <section class="category-section">
+          <div class="section-head"><h2>▦ Categorias</h2></div>
+          <div class="category-tiles">
+            <button class="category-tile" data-category="TV ao Vivo"><span>▣</span><strong>TV ao Vivo</strong><small>Canais abertos</small></button>
+            <button class="category-tile" data-category="Filmes"><span>▧</span><strong>Filmes</strong><small>Explore suas listas</small></button>
+            <button class="category-tile" data-category="Séries"><span>▣</span><strong>Séries</strong><small>Explore suas listas</small></button>
+            <button class="category-tile" data-category="Esportes"><span>⚽</span><strong>Esportes</strong><small>Fontes autorizadas</small></button>
+            <button class="category-tile" data-category="Canais 24h"><span>◷</span><strong>Canais 24h</strong><small>Programação contínua</small></button>
+            <button class="category-tile" data-category="Infantil"><span>☺</span><strong>Infantil</strong><small>Conteúdo para família</small></button>
+            <button class="category-tile" data-category="Documentários"><span>▤</span><strong>Documentários</strong><small>Conhecimento</small></button>
+            <button class="category-tile" data-category="Música"><span>♫</span><strong>Música</strong><small>Shows e clipes</small></button>
+          </div>
+        </section>
+        <section class="content-section recent-section">
+          <div class="section-head"><h2>🔥 Canais Recentes</h2><span class="section-note">Sua lista atual</span></div>
+          <div id="recentGrid" class="channel-grid recent-grid"></div>
+        </section>
+        <footer>WARLEY IPTV • Criado por Warley. Reprodutor independente; não fornece nem hospeda transmissões de TV.</footer>
+      </div>
+      <aside class="right-rail">
+        <div class="rail-heading"><span>◉</span> TV Ao Vivo <button id="railAll">Ver todos ›</button></div>
+        <div id="livePreview" class="live-preview"></div>
+        <div class="rail-promo"><div class="promo-crown">♛</div><strong>WARLEY <span>IPTV</span></strong><small>CRIADO POR WARLEY</small><p>AQUI É O SEU ENTRETENIMENTO EM UM SÓ LUGAR!</p></div>
+      </aside>
+    </div>
   </main>
 </div>
 <div class="modal-backdrop" id="playlistModal" hidden>
