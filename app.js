@@ -149,7 +149,7 @@
     }
   });
   // Restaura automaticamente a última URL usada; na primeira visita usa a lista brasileira padrão.
-  const DEFAULT_PLAYLIST_URL = 'https://iptv-org.github.io/iptv/countries/br.m3u';
+  const DEFAULT_PLAYLIST_URL = 'https://raw.githubusercontent.com/warleyvs597-ui/smartplay-iptv/main/warley-canais.m3u';
   async function restorePlaylist() {
     const playlistUrl = (() => { try { return localStorage.getItem('warleyIptvPlaylistUrl') || DEFAULT_PLAYLIST_URL; } catch (_) { return DEFAULT_PLAYLIST_URL; } })();
     $('m3uUrl').value = playlistUrl;
