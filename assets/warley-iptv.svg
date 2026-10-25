@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="300" viewBox="0 0 1200 300" role="img" aria-labelledby="title desc">
+<title id="title">WARLEY IPTV — Criado por Warley</title><desc id="desc">Logo azul neon com coroa e símbolo de reprodução.</desc>
+<defs>
+ <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#07182d"/><stop offset=".55" stop-color="#06101f"/><stop offset="1" stop-color="#092b49"/></linearGradient>
+ <linearGradient id="blue" x1="0" y1="0" x2="1" y2="1"><stop stop-color="#72e0ff"/><stop offset=".48" stop-color="#18baff"/><stop offset="1" stop-color="#0874e8"/></linearGradient>
+ <linearGradient id="silver" x1="0" y1="0" x2="0" y2="1"><stop stop-color="#fff"/><stop offset="1" stop-color="#b9d4e8"/></linearGradient>
+ <filter id="glow" x="-50%" y="-50%" width="200%" height="200%"><feGaussianBlur stdDeviation="8" result="b"/><feMerge><feMergeNode in="b"/><feMergeNode in="SourceGraphic"/></feMerge></filter>
+</defs>
+<rect width="1200" height="300" rx="28" fill="url(#bg)"/><rect x="2" y="2" width="1196" height="296" rx="26" fill="none" stroke="#168fda" stroke-opacity=".55" stroke-width="3"/>
+<path d="M700 0 L1200 0 L1200 300 L1000 300 Z" fill="#0877bd" opacity=".09"/><path d="M0 250 L420 0" stroke="#13baff" stroke-opacity=".12" stroke-width="3"/>
+<g transform="translate(48 46)" filter="url(#glow)">
+ <path d="M24 42 L48 10 L77 32 L105 5 L132 42 L124 61 L32 61 Z" fill="url(#blue)"/>
+ <circle cx="48" cy="10" r="6" fill="#8be7ff"/><circle cx="105" cy="5" r="6" fill="#8be7ff"/><circle cx="77" cy="32" r="5" fill="#8be7ff"/>
+ <rect x="8" y="70" width="142" height="112" rx="23" fill="#071b30" stroke="url(#blue)" stroke-width="9"/>
+ <path d="M62 95 Q57 92 57 103 L57 148 Q57 158 67 152 L109 129 Q119 123 109 117 Z" fill="url(#blue)"/>
+</g>
+<text x="235" y="140" font-family="Arial,Helvetica,sans-serif" font-size="94" font-weight="900" letter-spacing="-3" fill="url(#silver)">WARLEY</text>
+<text x="600" y="140" font-family="Arial,Helvetica,sans-serif" font-size="94" font-weight="900" letter-spacing="-3" fill="url(#blue)">IPTV</text>
+<text x="240" y="202" font-family="Arial,Helvetica,sans-serif" font-size="25" font-weight="700" letter-spacing="8" fill="#c5d8e8">CRIADO POR</text>
+<text x="492" y="202" font-family="Arial,Helvetica,sans-serif" font-size="30" font-weight="900" letter-spacing="4" fill="#28c5ff">WARLEY</text>
+<path d="M240 225 H790" stroke="#19b9ff" stroke-opacity=".7" stroke-width="2"/>
+<text x="240" y="262" font-family="Arial,Helvetica,sans-serif" font-size="22" font-weight="700" letter-spacing="3" fill="#8bdcff">SEU ENTRETENIMENTO EM UM SÓ LUGAR</text>
+<circle cx="1115" cy="58" r="8" fill="#25e5a0"/><text x="1135" y="66" font-family="Arial,Helvetica,sans-serif" font-size="16" font-weight="700" fill="#d9f5ff">ONLINE</text>
+</svg>
