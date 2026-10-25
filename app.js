@@ -50,16 +50,23 @@
       return !query || (c.name + ' ' + c.group).toLocaleLowerCase('pt-BR').includes(query);
     });
   }
+  function channelCard(c, compact = false) {
+    const key = encodeURIComponent(c.url);
+    const logo = c.logo ? `<img src="${esc(c.logo)}" alt="" loading="lazy" onerror="this.remove()">` : esc((c.name || 'TV').slice(0,2).toUpperCase());
+    return compact
+      ? `<button class="live-row" data-play="${key}"><span class="live-logo">${logo}</span><span class="live-meta"><strong>${esc(c.name)}</strong><small>${esc(c.group || 'Canal público')}</small></span><span class="live-badge">AO VIVO</span></button>`
+      : `<article class="channel-card"><div class="channel-top"><div class="channel-logo">${logo}</div><div><div class="channel-name">${esc(c.name)}</div><div class="channel-group">${esc(c.group || 'Sem categoria')}</div></div></div><div class="channel-bottom"><button class="play-channel" data-play="${key}">▶ Assistir</button><button class="favorite ${state.favorites.has(c.url)?'is-fav':''}" data-fav="${key}" title="Favoritar" aria-label="Favoritar ${esc(c.name)}">${state.favorites.has(c.url)?'♥':'♡'}</button></div></article>`;
+  }
   function render() {
     $('channelCount').textContent = state.channels.length;
     $('favoriteCount').textContent = state.favorites.size;
     const items = visibleChannels();
     $('emptyState').hidden = items.length > 0;
-    $('channelGrid').innerHTML = items.map((c) => {
-      const key = encodeURIComponent(c.url);
-      const logo = c.logo ? `<img src="${esc(c.logo)}" alt="" loading="lazy" onerror="this.remove()">` : esc((c.name || 'TV').slice(0,2).toUpperCase());
-      return `<article class="channel-card"><div class="channel-top"><div class="channel-logo">${logo}</div><div><div class="channel-name">${esc(c.name)}</div><div class="channel-group">${esc(c.group || 'Sem categoria')}</div></div></div><div class="channel-bottom"><button class="play-channel" data-play="${key}">▶ Assistir</button><button class="favorite ${state.favorites.has(c.url)?'is-fav':''}" data-fav="${key}" title="Favoritar" aria-label="Favoritar ${esc(c.name)}">${state.favorites.has(c.url)?'♥':'♡'}</button></div></article>`;
-    }).join('');
+    $('channelGrid').innerHTML = items.slice(0, 8).map(c => channelCard(c)).join('');
+    const recent = [...state.channels].slice(-6).reverse();
+    $('recentGrid').innerHTML = recent.map(c => channelCard(c)).join('');
+    $('livePreview').innerHTML = state.channels.slice(0, 8).map(c => channelCard(c, true)).join('');
+    $('channelCount').textContent = state.channels.length + ' canais carregados';
     $('listHeading').textContent = state.view === 'favorites' ? 'Seus favoritos' : state.view === 'live' ? 'TV ao vivo' : 'Canais disponíveis';
     $('pageTitle').textContent = state.view === 'favorites' ? 'Favoritos' : state.view === 'live' ? 'TV ao vivo' : 'Início';
     document.querySelectorAll('.nav[data-view]').forEach(b => b.classList.toggle('active', b.dataset.view === state.view));
@@ -122,6 +129,14 @@
   $('demoBtn').addEventListener('click', () => loadChannels(demoChannels, 'Demonstração carregada. A disponibilidade da fonte pública pode mudar.'));
   $('browseChannels').addEventListener('click', () => { state.view = 'live'; render(); document.querySelector('.content-section').scrollIntoView({behavior:'smooth'}); });
   $('settingsBtn').addEventListener('click', () => showModal('playlistModal'));
+  $('accountBtn').addEventListener('click', () => toast('Sua conta está conectada. Use o botão de sair no cabeçalho.'));
+  ['viewAllChannels','railAll'].forEach(id => $(id).addEventListener('click', () => { state.view = 'live'; render(); document.querySelector('.featured-section').scrollIntoView({behavior:'smooth'}); }));
+  document.querySelectorAll('[data-category]').forEach(b => b.addEventListener('click', () => {
+    const wanted = b.dataset.category.toLocaleLowerCase('pt-BR');
+    const option = [...$('categoryFilter').options].find(o => o.textContent.toLocaleLowerCase('pt-BR').includes(wanted) || wanted.includes(o.textContent.toLocaleLowerCase('pt-BR')));
+    $('categoryFilter').value = option && option.value !== 'all' ? option.value : 'all';
+    state.view = 'live'; render(); document.querySelector('.featured-section').scrollIntoView({behavior:'smooth'});
+  }));
   document.querySelectorAll('[data-close]').forEach(b => b.addEventListener('click', () => {
     if (b.dataset.close === 'playerModal') stopPlayer();
     closeModal(b.dataset.close);
@@ -132,6 +147,8 @@
   document.querySelectorAll('.nav[data-view]').forEach(b => b.addEventListener('click', () => { state.view = b.dataset.view; render(); }));
   $('searchInput').addEventListener('input', render);
   $('categoryFilter').addEventListener('change', render);
+  $('recentGrid').addEventListener('click', e => { const b=e.target.closest('[data-play]'); if(b) play(decodeURIComponent(b.dataset.play)); const f=e.target.closest('[data-fav]'); if(f){const url=decodeURIComponent(f.dataset.fav);if(state.favorites.has(url))state.favorites.delete(url);else state.favorites.add(url);render();} });
+  $('livePreview').addEventListener('click', e => { const b=e.target.closest('[data-play]'); if(b) play(decodeURIComponent(b.dataset.play)); });
   $('channelGrid').addEventListener('click', e => {
     const playButton = e.target.closest('[data-play]');
     const favButton = e.target.closest('[data-fav]');
