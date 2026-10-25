@@ -83,6 +83,7 @@
       } else throw new Error('Escolha um arquivo M3U ou informe a URL.');
       const channels = parseM3U(text);
       if (!channels.length) throw new Error('Nenhum canal encontrado. Verifique se a lista está no formato M3U e contém URLs de transmissão.');
+      if (url) { try { localStorage.setItem('warleyIptvPlaylistUrl', url); } catch (_) {} }
       loadChannels(channels, `${channels.length} canais carregados.`);
     } catch (e) {
       $('playlistError').textContent = e.message.includes('fetch') || e instanceof TypeError
@@ -147,5 +148,24 @@
       document.querySelectorAll('.modal-backdrop').forEach(m => m.hidden = true);
     }
   });
+  // Restaura automaticamente a última URL usada; na primeira visita usa a lista brasileira padrão.
+  const DEFAULT_PLAYLIST_URL = 'https://iptv-org.github.io/iptv/countries/br.m3u';
+  async function restorePlaylist() {
+    const playlistUrl = (() => { try { return localStorage.getItem('warleyIptvPlaylistUrl') || DEFAULT_PLAYLIST_URL; } catch (_) { return DEFAULT_PLAYLIST_URL; } })();
+    $('m3uUrl').value = playlistUrl;
+    try {
+      const response = await fetch(playlistUrl);
+      if (!response.ok) throw new Error(`HTTP ${response.status}`);
+      const text = await response.text();
+      const channels = parseM3U(text);
+      if (!channels.length) throw new Error('A lista não contém canais reconhecíveis.');
+      try { localStorage.setItem('warleyIptvPlaylistUrl', playlistUrl); } catch (_) {}
+      loadChannels(channels, `${channels.length} canais carregados automaticamente.`);
+    } catch (_) {
+      // Mantém o endereço no campo para facilitar uma nova tentativa manual.
+      toast('Não foi possível carregar a lista automaticamente. Confira sua conexão e tente novamente.');
+    }
+  }
   render();
+  restorePlaylist();
 })();
